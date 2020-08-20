@@ -1,4 +1,8 @@
-# Coupon Manager System
+## Code Status
+
+[![CircleCI](https://circleci.com/gh/tanngoc93/coupon-backend.svg?style=shield)](https://circleci.com/gh/tanngoc93/coupon-backend/tree/master)
+
+## Coupon Manager System
 
 The application allows adminstrators to create new promotional codes with the start and end time of the campaign. After that the system puts promotion codes into the app's schedule. The application will automationcally manage the status of the promotion code([**:upcoming**, **:currently_active**, **:expired**]).
 
