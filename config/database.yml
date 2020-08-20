@@ -1,0 +1,20 @@
+default: &default
+  adapter:  mysql2
+  encoding: utf8
+  pool:     <%= ENV["DB_POOL"] %>
+  port:     <%= ENV["DB_PORT"] %>
+  host:     <%= ENV["DB_HOST"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+
+development:
+  <<: *default
+  database: <%= ENV["DB_FOR_DEV"] %>
+
+test:
+  <<: *default
+  database: <%= ENV["DB_FOR_TEST"] %>
+
+production:
+  <<: *default
+  database: <%= ENV["DB_FOR_PROD"] %>

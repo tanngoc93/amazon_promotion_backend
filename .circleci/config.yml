@@ -1,0 +1,33 @@
+defaults: &defaults
+  working_directory: ~/buildbox
+  docker:
+    - image: circleci/ruby:2.6.5-browsers-legacy
+
+version: 2.0
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - setup_remote_docker
+
+      - run:
+          name: Build and push Docker image
+          command: |
+            TAG=${CIRCLE_BUILD_NUM}.${CIRCLE_SHA1:0:7}
+
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+            docker build --build-arg ARG_RAILS_MASTER_KEY=$DOCKER_RAILS_MASTER_KEY -t tanngoc93/com.thedogpaws.coupon:latest .
+            
+            docker push tanngoc93/com.thedogpaws.coupon:latest
+
+workflows:
+  version: 2
+  build-and-push:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master

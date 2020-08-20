@@ -1,0 +1,157 @@
+version: "3.7"
+
+services:
+  db:
+    image: mysql:5.7.25
+    environment:
+      MYSQL_ROOT_PASSWORD: 1qazxsw2
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - bridge-network
+
+  redis:
+    image: redis:5.0.3
+    command: redis-server
+    networks:
+      - bridge-network
+
+  webpacker:
+    build:
+      context: .
+      dockerfile: ./config/docker/dockerfile/Dockerfile
+    working_dir: /home/app/html
+    environment:
+      DB_POOL: 5
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: deployer
+      DB_PASSWORD: 1qazxsw2
+      DB_FOR_DEV: db_dev
+      DB_FOR_TEST: db_test
+      REDIS_HOST: redis://redis:6379/0
+      BUNDLE_PATH: /bundle/vendor
+      RAILS_ENV: development
+      RACK_ENV: development
+    command: bundle exec bin/webpack-dev-server
+    volumes:
+      - .:/home/app/html
+      - backend_modules_cache:/home/app/html/node_modules
+      - bundle_cache:/bundle
+    ports:
+      - "3035:3035"
+    depends_on:
+      - db
+      - redis
+    networks:
+      - bridge-network
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: ./config/docker/dockerfile/Dockerfile
+    working_dir: /home/app/html
+    environment:
+      DB_POOL: 5
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: 1qazxsw2
+      DB_FOR_DEV: db_dev
+      DB_FOR_TEST: db_test
+      REDIS_HOST: redis://redis:6379/0
+      BUNDLE_PATH: /bundle/vendor
+      RAILS_ENV: development
+      RACK_ENV: development
+      PLATFORM: SIDEKIQ
+      PORT: 3000
+    command: sh "config/docker/bash/development.sh"
+    volumes:
+      - .:/home/app/html
+      - backend_modules_cache:/home/app/html/node_modules
+      - bundle_cache:/bundle
+    depends_on:
+      - db
+      - redis
+      - webpacker
+      - backend
+    networks:
+      - bridge-network
+
+  backend:
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: ./config/docker/dockerfile/Dockerfile
+    working_dir: /home/app/html
+    environment:
+      DB_POOL: 5
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: 1qazxsw2
+      DB_FOR_DEV: db_dev
+      DB_FOR_TEST: db_test
+      REDIS_HOST: redis://redis:6379/0
+      BUNDLE_PATH: /bundle/vendor
+      RAILS_ENV: development
+      RACK_ENV: development
+      PLATFORM: RAILS
+      PORT: 3000
+    command: sh "config/docker/bash/development.sh"
+    volumes:
+      - .:/home/app/html
+      - backend_modules_cache:/home/app/html/node_modules
+      - bundle_cache:/bundle
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+      - webpacker
+    networks:
+      - bridge-network
+
+  frontend:
+    tty: true
+    stdin_open: true
+    build:
+      context: ../com.thedogpaws
+      dockerfile: ./Dockerfile.dev
+    working_dir: /home/app/html
+    environment:
+      PREFIX: ""
+      SITE_NAME: "TheDogPaws.com"
+      SITE_DOMAIN: "https://thedogpaws.com/"
+      SITE_FEATURE_IMAGE: "https://thedogpaws.com/wp-content/uploads/2020/04/TheDogPaws.png"
+      COUPON_PAGE_TITLE: "Verified Coupons"
+      COUPON_PAGE_DESCRIPTION: "TheDogPaws.com aims to be one of the only dedicated dog news sources (news about dogs–not necessarily for dogs). This includes dogs in the media, news-worthy events, product recalls, celebrity dogs, and anything else in the news that involves dogs[...]"
+      COUPON_API: "https://coupon.thedogpaws.com/api/v1"
+      BLOG_API: ""
+    command: bash -c "mkdir -p tmp/log tmp/pids && yarn install && yarn dev"
+    volumes:
+      - ../com.thedogpaws:/home/app/html
+      - frontend_build_cache:/home/app/html/build
+      - frontend_modules_cache:/home/app/html/node_modules
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+      - redis
+      - sidekiq
+      - webpacker
+      - backend
+    networks:
+      - bridge-network
+
+networks:
+  bridge-network:
+    driver: bridge
+
+volumes:
+  db:
+  frontend_build_cache:
+  frontend_modules_cache:
+  backend_modules_cache:
+  bundle_cache:

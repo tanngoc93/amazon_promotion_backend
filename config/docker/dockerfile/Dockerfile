@@ -1,0 +1,44 @@
+FROM phusion/passenger-ruby26
+
+ENV PORT=3000           \
+ NODE_ENV=development   \
+ RACK_ENV=development   \
+ APP_DIR=/home/app/html \
+ RAILS_ENV=development
+
+RUN bash -lc "rvm --default use ruby-2.6.5"
+RUN mkdir -p $APP_DIR $APP_DIR/log $APP_DIR/tmp/pids
+
+WORKDIR $APP_DIR
+
+RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold"
+RUN apt-get install mysql-client -y && apt-get install tzdata -y
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get update && apt-get install -y nodejs
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+ && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+ && apt-get update && apt-get install yarn
+
+ADD Gemfile $APP_DIR/Gemfile
+ADD Gemfile.lock $APP_DIR/Gemfile.lock
+
+RUN gem install bundler \
+ && bundle config --global frozen 1 && bundle install
+
+ADD package.json $APP_DIR/package.json
+ADD yarn.lock $APP_DIR/yarn.lock
+
+RUN yarn install
+
+COPY --chown=app:app . $APP_DIR
+
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+#
+EXPOSE $PORT
+
+#
+RUN chmod +x $APP_DIR/config/docker/bash/development.sh
+
+#
+CMD ["sh", "-c", "/home/app/html/config/docker/bash/development.sh"]
