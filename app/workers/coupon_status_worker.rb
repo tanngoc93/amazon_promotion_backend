@@ -4,18 +4,18 @@ class CouponStatusWorker
   def perform(id)
     coupon = Coupon.find_by(id: id)
 
-    return if coupon.nil?
-
-    if coupon.upcoming?
-      update_coupon(coupon, :currently_active)
-    else
-      update_coupon(coupon, :expired)
+    if coupon.present?
+      if coupon.upcoming?
+        update_coupon_status(coupon, :currently_active)
+      else
+        update_coupon_status(coupon, :expired)
+      end
     end
   end
 
   private
 
-  def update_coupon(coupon, status)
+  def update_coupon_status(coupon, status)
     coupon.update(status: status)
   end
 end

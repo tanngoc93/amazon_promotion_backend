@@ -19,7 +19,7 @@ services:
   webpacker:
     build:
       context: .
-      dockerfile: ./config/docker/dockerfile/Dockerfile
+      dockerfile: ./Dockerfile.dev
     working_dir: /home/app/html
     environment:
       DB_POOL: 5
@@ -49,7 +49,7 @@ services:
   sidekiq:
     build:
       context: .
-      dockerfile: ./config/docker/dockerfile/Dockerfile
+      dockerfile: ./Dockerfile.dev
     working_dir: /home/app/html
     environment:
       DB_POOL: 5
@@ -83,7 +83,7 @@ services:
     stdin_open: true
     build:
       context: .
-      dockerfile: ./config/docker/dockerfile/Dockerfile
+      dockerfile: ./Dockerfile.dev
     working_dir: /home/app/html
     environment:
       DB_POOL: 5

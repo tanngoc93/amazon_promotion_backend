@@ -6,7 +6,7 @@ ENV PORT=3000           \
  APP_DIR=/home/app/html \
  RAILS_ENV=development
 
-RUN bash -lc "rvm --default use ruby-2.6.5"
+RUN bash -lc "rvm --default use ruby-2.6.6"
 RUN mkdir -p $APP_DIR $APP_DIR/log $APP_DIR/tmp/pids
 
 WORKDIR $APP_DIR
