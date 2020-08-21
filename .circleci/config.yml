@@ -10,9 +10,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-          name: Upload reports
-          command: bash <(curl -s https://codecov.io/bash)
 
       - run:
           name: Login to Docker Registry
