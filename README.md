@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/tanngoc93/coupon-backend.svg?style=shield)](https://circleci.com/gh/tanngoc93/coupon-backend/tree/master) [![codecov](https://codecov.io/gh/tanngoc93/coupon-backend/branch/master/graph/badge.svg)](https://codecov.io/gh/tanngoc93/coupon-backend)
 
-## Coupon Manager System
+## Coupon API for TheDogPaws.com/Coupons
 
 The application allows adminstrators to create new promotional codes with the start and end time of the campaign. After that the system puts promotion codes into the app's schedule. The application will automationcally manage the status of the promotion code([**:upcoming**, **:currently_active**, **:expired**]).
 
