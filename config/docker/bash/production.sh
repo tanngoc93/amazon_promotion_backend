@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
-	
+
+echo
 echo "=> Platform: $PLATFORM"
 
 if [ "$PLATFORM" = "SIDEKIQ" ]; then
@@ -13,6 +14,5 @@ else
   echo "Seed data migration"
   bundle exec rake seed:migrate
   echo
-  echo "Starting the Phusion Passenger server"
   passenger start
 fi

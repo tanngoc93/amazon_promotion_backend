@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+echo
 echo "=> Platform: $PLATFORM"
 
 # Remove a potentially pre-existing server.pid for Rails.
@@ -19,7 +20,6 @@ else
   echo "Seed data migration"
   bundle exec rake seed:migrate
   echo
-  echo "Starting the Puma server"
   bundle exec rails s -b 0.0.0.0 -p $PORT
 fi
 

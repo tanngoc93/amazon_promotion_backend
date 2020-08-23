@@ -7,8 +7,17 @@ class Coupon < ApplicationRecord
   belongs_to :product_category
   belongs_to :affiliate_platform
 
-  enum discount_rate_type: [:cash, :percentage, :unknow]
-  enum status: [:upcoming, :currently_active, :expired]
+  enum discount_rate_type: [
+    :cash,
+    :percentage,
+    :unknow
+  ]
+
+  enum status: [
+    :upcoming,
+    :currently_active,
+    :expired
+  ]
 
   validate  :timeline_valid
   validates :name, :code, uniqueness: true
@@ -20,7 +29,11 @@ class Coupon < ApplicationRecord
   }
 
   scope :by_category, -> (id) do
-    where(product_category_id: id).currently_active
+    if id.eql?("any")
+      currently_active
+    else
+      where(product_category_id: id).currently_active
+    end
   end
 
   before_save :set_status
