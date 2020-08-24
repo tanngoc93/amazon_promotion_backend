@@ -2,7 +2,7 @@ class Api::V1::ProductCategoriesController < Api::V1::ApiController
   skip_before_action :authenticate!, only: [:index]
 
   def index
-    categories = ProductCategory.all
+    categories = ProductCategory.order(name: :asc)
 
     render json: {
       categories: categories
