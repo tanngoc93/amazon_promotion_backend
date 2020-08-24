@@ -123,9 +123,9 @@ services:
     environment:
       PREFIX: ""
       SITE_NAME: "TheDogPaws.com"
-      SITE_DOMAIN: "https://thedogpaws.com/"
-      SITE_FEATURE_IMAGE: "https://thedogpaws.com/wp-content/uploads/2020/04/TheDogPaws.png"
-      COUPON_PAGE_TITLE: "Verified Coupons"
+      SITE_DOMAIN: "127.0.0.1:8080"
+      SITE_FEATURE_IMAGE: "//tdpaws.b-cdn.net/wp-content/uploads/2020/04/TheDogPawsLogo.jpg"
+      COUPON_PAGE_TITLE: "******** ******** ******** Verified Coupons ******** ******** ********"
       COUPON_PAGE_DESCRIPTION: "TheDogPaws.com aims to be one of the only dedicated dog news sources (news about dogs–not necessarily for dogs). This includes dogs in the media, news-worthy events, product recalls, celebrity dogs, and anything else in the news that involves dogs[...]"
       COUPON_API: "https://coupon.thedogpaws.com/api/v1"
       BLOG_API: ""
