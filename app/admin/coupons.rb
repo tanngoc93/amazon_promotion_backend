@@ -37,7 +37,11 @@ ActiveAdmin.register Coupon do
       f.input :site_stripe_content, input_html: { rows: 5 }
       f.input :description, input_html: { rows: 5 }
       f.input :discount_rate_type      
-      f.input :discount_rate, input_html: { value: "" }
+      if f.object.new_record?
+        f.input :discount_rate, input_html: { value: "" }
+      else
+        f.input :discount_rate
+      end
       f.input :ended_before_deadline, label: "Ended before the deadline"
     end
     f.actions
