@@ -117,7 +117,7 @@ services:
     tty: true
     stdin_open: true
     build:
-      context: ../com.thedogpaws
+      context: ./CouponFrontend
       dockerfile: ./Dockerfile.dev
     working_dir: /home/app/html
     environment:
@@ -131,7 +131,7 @@ services:
       BLOG_API: ""
     command: bash -c "mkdir -p tmp/log tmp/pids && yarn install && yarn dev"
     volumes:
-      - ../com.thedogpaws:/home/app/html
+      - ./CouponFrontend:/home/app/html
       - frontend_build_cache:/home/app/html/build
       - frontend_modules_cache:/home/app/html/node_modules
     ports:
