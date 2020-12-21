@@ -1,0 +1,3 @@
+[submodule "CouponFrontend"]
+	path = CouponFrontend
+	url = https://github.com/tanngoc93/CouponFrontend.git
