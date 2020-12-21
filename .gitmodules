@@ -4,6 +4,3 @@
 [submodule "CouponSwarmManagement"]
 	path = CouponSwarmManagement
 	url = https://github.com/tanngoc93/CouponSwarmManagement.git
-[submodule "CouponCrawler"]
-	path = CouponCrawler
-	url = https://github.com/tanngoc93/CouponCrawler.git
