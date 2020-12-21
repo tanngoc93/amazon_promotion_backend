@@ -2,7 +2,7 @@
 workers ENV['WEB_CONCURRENCY'].to_i || 1
 
 # Min and Max threads per worker
-threads_count = ENV.fetch("RAILS_MAX_THREADS") { 2 }
+threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 threads threads_count, threads_count
 
 port            ENV.fetch("PORT") { 3000 }
