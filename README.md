@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/tanngoc93/CouponBackend.svg?style=shield)](https://circleci.com/gh/tanngoc93/CouponBackend/tree/master) [![codecov](https://codecov.io/gh/tanngoc93/CouponBackend/branch/master/graph/badge.svg)](https://codecov.io/gh/tanngoc93/CouponBackend)
 
-## Clone codebase into your computer && sync submodule codebase
+## Clone codebase into your computer && sync all of submodules
 
 
 ```html
