@@ -7,6 +7,9 @@ echo "=> Platform: $PLATFORM"
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f ${APP_DIR}/tmp/pids/server.pid
 
+#
+bundle check || bundle install
+
 if [ "$PLATFORM" = "SIDEKIQ" ]; then
   bundle exec sidekiq -C config/sidekiq.yml -e $RAILS_ENV
 else

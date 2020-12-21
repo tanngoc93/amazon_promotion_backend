@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   db:
-    image: mysql:5.7.25
+    image: mysql:8.0.22
     environment:
       MYSQL_ROOT_PASSWORD: 1qazxsw2
     volumes:
