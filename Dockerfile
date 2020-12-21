@@ -21,13 +21,13 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
  && apt-get update && apt-get install yarn
 
-ADD Gemfile $APP_DIR/Gemfile
+ADD Gemfile      $APP_DIR/Gemfile
 ADD Gemfile.lock $APP_DIR/Gemfile.lock
 RUN gem install bundler \
  && bundle config --global frozen 1 && bundle install --without development test
 
 ADD package.json $APP_DIR/package.json
-ADD yarn.lock $APP_DIR/yarn.lock
+ADD yarn.lock    $APP_DIR/yarn.lock
 RUN yarn install --production=true
 
 COPY --chown=app:app . $APP_DIR
