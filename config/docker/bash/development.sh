@@ -3,11 +3,18 @@ set -e
 
 echo "=> Platform: $PLATFORM"
 
-# Remove a potentially pre-existing server.pid for Rails.
-rm -f $APP_DIR/tmp/pids/server.pid
-
 #
 bundle check || bundle install
+
+#
+if [ ! -d $APP_DIR/tmp/pids ]; then
+  mkdir -p $APP_DIR/tmp/pids
+fi
+
+# Remove a potentially pre-existing server.pid for Rails.
+if [ -f $APP_DIR/tmp/pids/server.pid ]; then
+  rm -f $APP_DIR/tmp/pids/server.pid
+fi
 
 if [ "$PLATFORM" = "SIDEKIQ" ]; then
   bundle exec sidekiq -C config/sidekiq.yml -e $RAILS_ENV
