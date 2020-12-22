@@ -20,12 +20,10 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 
 ADD Gemfile      $APP_DIR/Gemfile
 ADD Gemfile.lock $APP_DIR/Gemfile.lock
-
 RUN gem install bundler && bundle install
 
 ADD package.json $APP_DIR/package.json
 ADD yarn.lock    $APP_DIR/yarn.lock
-
 RUN yarn install
 
 COPY --chown=app:app . $APP_DIR
