@@ -27,12 +27,13 @@ services:
       DB_PORT: 3306
       DB_USER: deployer
       DB_PASSWORD: 1qazxsw2
-      DB_FOR_DEV: db_dev
-      DB_FOR_TEST: db_test
+      DB_FOR_DEV: cp_db_dev
+      DB_FOR_TEST: cp_db_test
       REDIS_HOST: redis://redis:6379/0
       BUNDLE_PATH: /bundle/vendor
       RAILS_ENV: development
       RACK_ENV: development
+      NODE_ENV: development
     command: bundle exec bin/webpack-dev-server
     volumes:
       - .:/home/app/html
@@ -57,12 +58,13 @@ services:
       DB_PORT: 3306
       DB_USER: root
       DB_PASSWORD: 1qazxsw2
-      DB_FOR_DEV: db_dev
-      DB_FOR_TEST: db_test
+      DB_FOR_DEV: cp_db_dev
+      DB_FOR_TEST: cp_db_test
       REDIS_HOST: redis://redis:6379/0
       BUNDLE_PATH: /bundle/vendor
       RAILS_ENV: development
       RACK_ENV: development
+      NODE_ENV: development
       PLATFORM: sidekiq
       PORT: 3000
     command: /bin/sh "/home/app/html/config/runner/dev.sh"
@@ -91,12 +93,13 @@ services:
       DB_PORT: 3306
       DB_USER: root
       DB_PASSWORD: 1qazxsw2
-      DB_FOR_DEV: db_dev
-      DB_FOR_TEST: db_test
+      DB_FOR_DEV: cp_db_dev
+      DB_FOR_TEST: cp_db_test
       REDIS_HOST: redis://redis:6379/0
       BUNDLE_PATH: /bundle/vendor
       RAILS_ENV: development
       RACK_ENV: development
+      NODE_ENV: development
       PLATFORM: backend
       PORT: 3000
     command: /bin/sh "/home/app/html/config/runner/dev.sh"
