@@ -1,6 +1,6 @@
 [submodule "CouponFrontend"]
 	path = CouponFrontend
 	url = https://github.com/tanngoc93/CouponFrontend.git
-[submodule "CouponSwarmManagement"]
-	path = CouponSwarmManagement
-	url = https://github.com/tanngoc93/CouponSwarmManagement.git
+[submodule "CouponSwarm"]
+	path = CouponSwarm
+	url = https://github.com/tanngoc93/CouponSwarm.git
