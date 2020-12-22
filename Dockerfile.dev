@@ -1,10 +1,10 @@
 FROM phusion/passenger-ruby26
 
-ENV PORT=3000           \
- NODE_ENV=development   \
- RACK_ENV=development   \
- APP_DIR=/home/app/html \
- RAILS_ENV=development
+ENV PORT=3000              \
+    NODE_ENV=development   \
+    RACK_ENV=development   \
+    APP_DIR=/home/app/html \
+    RAILS_ENV=development
 
 RUN bash -lc "rvm --default use ruby-2.6.6"
 RUN mkdir -p $APP_DIR $APP_DIR/log $APP_DIR/tmp/pids
@@ -37,7 +37,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 EXPOSE $PORT
 
 #
-RUN chmod +x $APP_DIR/config/docker/bash/development.sh
+RUN chmod +x $APP_DIR/config/runner/dev.sh
 
 #
-CMD ["sh", "-c", "/home/app/html/config/docker/bash/development.sh"]
+CMD ["sh", "-c", "/home/app/html/config/runner/dev.sh"]

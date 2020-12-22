@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-echo "=> Platform: $PLATFORM"
-
 #
 bundle check || bundle install
 

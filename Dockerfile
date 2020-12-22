@@ -2,12 +2,12 @@ FROM phusion/passenger-ruby26
 
 ARG ARG_RAILS_MASTER_KEY
 
-ENV PORT=80             \
- NODE_ENV=production    \
- RACK_ENV=production    \
- RAILS_ENV=production   \
- APP_DIR=/home/app/html \
- RAILS_MASTER_KEY=$ARG_RAILS_MASTER_KEY
+ENV PORT=80                \
+    NODE_ENV=production    \
+    RACK_ENV=production    \
+    RAILS_ENV=production   \
+    APP_DIR=/home/app/html \
+    RAILS_MASTER_KEY=$ARG_RAILS_MASTER_KEY
 
 RUN mkdir -p $APP_DIR $APP_DIR/log $APP_DIR/tmp/pids
 
@@ -46,7 +46,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 EXPOSE $PORT
 
 #
-RUN chmod +x $APP_DIR/config/docker/bash/production.sh
+RUN chmod +x $APP_DIR/config/runner/pro.sh
 
 #
-CMD ["sh", "-c", "/home/app/html/config/docker/bash/production.sh"]
+CMD ["sh", "-c", "/home/app/html/config/runner/pro.sh"]

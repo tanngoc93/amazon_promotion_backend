@@ -65,7 +65,7 @@ services:
       RACK_ENV: development
       PLATFORM: SIDEKIQ
       PORT: 3000
-    command: sh "config/docker/bash/development.sh"
+    command: /bin/sh "/home/app/html/config/runner/dev.sh"
     volumes:
       - .:/home/app/html
       - backend_modules_cache:/home/app/html/node_modules
@@ -99,7 +99,7 @@ services:
       RACK_ENV: development
       PLATFORM: RAILS
       PORT: 3000
-    command: sh "config/docker/bash/development.sh"
+    command: /bin/sh "/home/app/html/config/runner/dev.sh"
     volumes:
       - .:/home/app/html
       - backend_modules_cache:/home/app/html/node_modules
@@ -129,7 +129,7 @@ services:
       COUPON_PAGE_DESCRIPTION: "TheDogPaws.com aims to be one of the only dedicated dog news sources (news about dogs–not necessarily for dogs). This includes dogs in the media, news-worthy events, product recalls, celebrity dogs, and anything else in the news that involves dogs[...]"
       COUPON_API: "https://coupon.thedogpaws.com/api/v1"
       BLOG_API: ""
-    command: bash -c "mkdir -p tmp/log tmp/pids && yarn install && yarn dev"
+    command: bash -c "yarn install && yarn dev"
     volumes:
       - ./CouponFrontend:/home/app/html
       - frontend_build_cache:/home/app/html/build
