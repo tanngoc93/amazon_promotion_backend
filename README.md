@@ -17,7 +17,7 @@ git submodule init
 git submodule update
 ```
 
-## Coupon API for TheDogPaws.com/Coupons
+## Coupon API for TheDogPaws.com/coupons
 
 The application allows adminstrators to create new promotional codes with the start and end time of the campaign. After that the system puts promotion codes into the app's schedule. The application will automationcally manage the status of the promotion code([**:upcoming**, **:currently_active**, **:expired**]).
 
