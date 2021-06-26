@@ -6,7 +6,7 @@ ENV PORT=3000              \
     APP_DIR=/home/app/html \
     RAILS_ENV=development
 
-RUN bash -lc "rvm --default use ruby-2.6.6"
+RUN bash -lc "rvm --default use ruby-2.6.7"
 RUN mkdir -p $APP_DIR $APP_DIR/log $APP_DIR/tmp/pids
 
 WORKDIR $APP_DIR
@@ -18,9 +18,11 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
  && apt-get update && apt-get install yarn
 
+RUN apt-get install -y shared-mime-info
+
 ADD Gemfile      $APP_DIR/Gemfile
 ADD Gemfile.lock $APP_DIR/Gemfile.lock
-RUN gem install bundler && bundle install
+RUN gem install bundler && bundle update mimemagic && bundle install
 
 ADD package.json $APP_DIR/package.json
 ADD yarn.lock    $APP_DIR/yarn.lock
