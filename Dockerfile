@@ -25,8 +25,9 @@ RUN apt-get install -y shared-mime-info
 
 ADD Gemfile      $APP_DIR/Gemfile
 ADD Gemfile.lock $APP_DIR/Gemfile.lock
+
 RUN gem install bundler \
- && bundle config --global frozen 1 && bundle install --without development test
+ && bundle config --global frozen 1 && bundle update mimemagic && bundle install --without development test
 
 ADD package.json $APP_DIR/package.json
 ADD yarn.lock    $APP_DIR/yarn.lock
