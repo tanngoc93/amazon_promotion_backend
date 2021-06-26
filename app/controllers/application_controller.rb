@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
   def redirect_to_new_version!
-    redirect_to "https://thedogpaws.com/coupons"
+    redirect_to "https://toocoolcats.com/"
   end
 
   def page
