@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/tanngoc93/CouponBackend.svg?style=shield)](https://circleci.com/gh/tanngoc93/CouponBackend/tree/master) [![codecov](https://codecov.io/gh/tanngoc93/CouponBackend/branch/master/graph/badge.svg)](https://codecov.io/gh/tanngoc93/CouponBackend)
 
-## Clone codebase into your computer && sync all of submodules
+## Clone codebase into your computer & sync all of submodules
 
 
 ```html
@@ -17,7 +17,7 @@ git submodule init
 git submodule update
 ```
 
-## Coupon API for TheDogPaws.com/coupons
+## API for [Coupon.TooCoolCats.com](https://coupon.toocoolcats.com)
 
 The application allows adminstrators to create new promotional codes with the start and end time of the campaign. After that the system puts promotion codes into the app's schedule. The application will automationcally manage the status of the promotion code([**:upcoming**, **:currently_active**, **:expired**]).
 
