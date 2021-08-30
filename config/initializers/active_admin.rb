@@ -159,7 +159,7 @@ ActiveAdmin.setup do |config|
 
   # == Setting a Favicon
   #
-  config.favicon = '/favicon.png'
+  config.favicon = '//toocoolcats.com/wp-content/uploads/2021/08/toocoolcats2-280x280.jpg'
 
   # == Meta Tags
   #
