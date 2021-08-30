@@ -21,7 +21,7 @@ ActiveAdmin.register AdminUser do
     attributes_table do
       row :email
       row :debug_url do |admin|
-        link_to("DEBUG","https://thedogpaws.com/coupons?debug=true&token=#{admin.access_token}", target: :blank)
+        link_to("Debug","https://toocoolcats.com/coupons?debug=true&token=#{admin.access_token}", target: :blank)
       end
       row :created_at
       row :updated_at

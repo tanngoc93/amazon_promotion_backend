@@ -17,23 +17,19 @@ git submodule init
 git submodule update
 ```
 
-## API for [Coupon.TooCoolCats.com](https://coupon.toocoolcats.com)
+## API for [TooCoolCats.com/Coupons](https://toocoolcats.com/coupons)
 
 The application allows adminstrators to create new promotional codes with the start and end time of the campaign. After that the system puts promotion codes into the app's schedule. The application will automationcally manage the status of the promotion code([**:upcoming**, **:currently_active**, **:expired**]).
 
 ### Prerequisites
 
-MySQL
+* MySQL
+* Redis server
+* Node version: 10.x
+* Ruby version: 2.6.x
 
-Redis server
-
-Node version: 10.x
-
-Ruby version: 2.6.x
-
-Rails version: 5.2.x
-
-Docker/Docker Compose(Optional)
+* Rails version: 5.2.x
+* Docker/Docker Compose(Optional)
 
 ## Please set your ENVs
 
@@ -50,7 +46,6 @@ REDIS_HOST [required]
 RAILS_ENV [required]
 RACK_ENV [optional]
 ```
-
 
 ## Built with
 
