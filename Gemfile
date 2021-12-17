@@ -15,7 +15,7 @@ gem 'devise', '~> 4.2'
 gem 'activeadmin'
 gem 'seed_migration'
 gem 'acts-as-taggable-on', '~> 6.0'
-gem 'kaminari', github: 'kaminari/kaminari'
+gem 'kaminari'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'rack-cors'
 
