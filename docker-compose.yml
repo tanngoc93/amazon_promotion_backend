@@ -120,7 +120,7 @@ services:
     tty: true
     stdin_open: true
     build:
-      context: ./CouponFrontend
+      context: ./cpfrontend
       dockerfile: ./Dockerfile.dev
     working_dir: /home/app/html
     environment:
@@ -134,7 +134,7 @@ services:
       BLOG_API: ""
     command: bash -c "yarn install && yarn dev"
     volumes:
-      - ./CouponFrontend:/home/app/html
+      - ./cpfrontend:/home/app/html
       - frontend_build_cache:/home/app/html/build
       - frontend_modules_cache:/home/app/html/node_modules
     ports:
