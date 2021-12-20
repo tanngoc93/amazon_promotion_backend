@@ -1,6 +1,6 @@
 ## Code Status
 
-[![CircleCI](https://circleci.com/gh/tanngoc93/CouponBackend.svg?style=shield)](https://circleci.com/gh/tanngoc93/CouponBackend/tree/master) [![codecov](https://codecov.io/gh/tanngoc93/CouponBackend/branch/master/graph/badge.svg)](https://codecov.io/gh/tanngoc93/CouponBackend)
+[![CircleCI](https://circleci.com/gh/tanngoc93/coupon_backend.svg?style=shield)](https://circleci.com/gh/tanngoc93/coupon_backend/tree/master) [![codecov](https://codecov.io/gh/tanngoc93/coupon_backend/branch/master/graph/badge.svg)](https://codecov.io/gh/tanngoc93/coupon_backend)
 
 ## Clone codebase into your computer & sync all of submodules
 
