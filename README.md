@@ -1,12 +1,12 @@
 ## Code Status
 
-[![CircleCI](https://circleci.com/gh/tanngoc93/coupon_backend.svg?style=shield)](https://circleci.com/gh/tanngoc93/coupon_backend/tree/master) [![codecov](https://codecov.io/gh/tanngoc93/coupon_backend/branch/master/graph/badge.svg)](https://codecov.io/gh/tanngoc93/coupon_backend)
+[![CircleCI](https://circleci.com/gh/tanngoc93/amazon_promotion_backend.svg?style=shield)](https://circleci.com/gh/tanngoc93/amazon_promotion_backend/tree/master) [![codecov](https://codecov.io/gh/tanngoc93/amazon_promotion_backend/branch/master/graph/badge.svg)](https://codecov.io/gh/tanngoc93/amazon_promotion_backend)
 
 ## Clone codebase into your computer & sync all of submodules
 
 
 ```html
-git clone https://github.com/tanngoc93/CouponBackend.git
+git clone [URL]
 ```
 
 ```html
@@ -17,7 +17,7 @@ git submodule init
 git submodule update
 ```
 
-## API for [TooCoolCats.com/Coupons](https://toocoolcats.com/coupons)
+## API for frontend
 
 The application allows adminstrators to create new promotional codes with the start and end time of the campaign. After that the system puts promotion codes into the app's schedule. The application will automationcally manage the status of the promotion code([**:upcoming**, **:currently_active**, **:expired**]).
 
@@ -25,11 +25,11 @@ The application allows adminstrators to create new promotional codes with the st
 
 * MySQL
 * Redis server
-* Node version: 10.x
-* Ruby version: 2.6.x
+* Node version: 14.x.x
+* Ruby version: 2.7.x
 
-* Rails version: 5.2.x
-* Docker/Docker Compose(Optional)
+* Rails version: 5.x.x
+* Docker/Docker Compose
 
 ## Please set your ENVs
 
@@ -59,7 +59,3 @@ RACK_ENV [optional]
 * [Docker Swarm](https://docs.docker.com/engine/swarm/) - Cluster management integrated with Docker Engine
 * [Cloudflare](https://www.cloudflare.com/) - CDN services, DDoS mitigation, Internet security and distributed domain name server
 * [CircleCI](https://circleci.com/) - Continuous Integration and Delivery
-
-## Authors
-
-* **Ngoc Nguyen Tan** - *Individual project* - [NgocNT](https://github.com/tanngoc93)
