@@ -18,7 +18,7 @@ jobs:
 
       - run:
           name: Build image
-          command: docker build --build-arg ARG_RAILS_MASTER_KEY=$DOCKER_RAILS_MASTER_KEY -t tanngoc93/coupon.backend:latest .
+          command: docker build --build-arg ARG_RAILS_MASTER_KEY=$ARG_RAILS_MASTER_KEY -t tanngoc93/coupon.backend:latest .
 
       - run:
           name: Push image to Docker registry 

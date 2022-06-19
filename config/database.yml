@@ -1,20 +1,21 @@
 default: &default
   adapter:  mysql2
   encoding: utf8
-  pool:     <%= ENV["DB_POOL"] %>
-  port:     <%= ENV["DB_PORT"] %>
-  host:     <%= ENV["DB_HOST"] %>
-  username: <%= ENV["DB_USER"] %>
-  password: <%= ENV["DB_PASSWORD"] %>
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool:     <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host:     <%= ENV.fetch("DATABASE_HOST")     { 'localhost' } %>
+  username: <%= ENV.fetch("DATABASE_USER")     { 'postgres' } %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") { 'postgres' } %>
 
 development:
   <<: *default
-  database: <%= ENV["DB_FOR_DEV"] %>
+  database: <%= ENV.fetch("DATABASE_DEVELOPMENT") { 'coupon_development' } %>
 
 test:
   <<: *default
-  database: <%= ENV["DB_FOR_TEST"] %>
+  database: <%= ENV.fetch("DATABASE_TEST")        { 'coupon_test' } %>
 
 production:
   <<: *default
-  database: <%= ENV["DB_FOR_PROD"] %>
+  database: <%= ENV.fetch("DATABASE_PRODUCTION")  { 'coupon_production' } %>

@@ -1,6 +1,0 @@
-[submodule "cpswarm"]
-	path = cpswarm
-	url = https://github.com/tanngoc93/coupon_swarm.git
-[submodule "cpfrontend"]
-	path = cpfrontend
-	url = https://github.com/tanngoc93/coupon_frontend.git

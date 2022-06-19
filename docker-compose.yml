@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   db:
-    image: mysql:8.0.22
+    image: mariadb:10.7.4-focal
     environment:
       MYSQL_ROOT_PASSWORD: 1qazxsw2
     volumes:
@@ -11,36 +11,35 @@ services:
       - bridge-network
 
   redis:
-    image: redis:5.0.3
+    image: redis:7.0.0
     command: redis-server
     networks:
       - bridge-network
 
-  webpacker:
+  backend:
+    tty: true
+    stdin_open: true
     build:
       context: .
-      dockerfile: ./Dockerfile.dev
-    working_dir: /home/app/html
-    environment:
-      DB_POOL: 5
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_USER: deployer
-      DB_PASSWORD: 1qazxsw2
-      DB_FOR_DEV: cp_db_dev
-      DB_FOR_TEST: cp_db_test
-      REDIS_HOST: redis://redis:6379/0
-      BUNDLE_PATH: /bundle/vendor
-      RAILS_ENV: development
-      RACK_ENV: development
-      NODE_ENV: development
-    command: bundle exec bin/webpack-dev-server
+      dockerfile: ./.dockerdev/Dockerfile.dev
+    working_dir: /app
     volumes:
-      - .:/home/app/html
-      - backend_modules_cache:/home/app/html/node_modules
+      - .:/app
       - bundle_cache:/bundle
+    environment:
+      DATABASE_POOL: 5
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_USER: root
+      DATABASE_PASSWORD: 1qazxsw2
+      REDIS_URL: redis://redis:6379/0
+      BUNDLE_PATH: /bundle
+      RAILS_ENV: production
+      NODE_ENV: production
+      PORT: 3000
+    command: /bin/sh ".dockerdev/commander/commander.rails.sh"
     ports:
-      - "3035:3035"
+      - "3000:3000"
     depends_on:
       - db
       - redis
@@ -50,101 +49,26 @@ services:
   sidekiq:
     build:
       context: .
-      dockerfile: ./Dockerfile.dev
-    working_dir: /home/app/html
+      dockerfile: ./.dockerdev/Dockerfile.dev
+    working_dir: /app
     environment:
-      DB_POOL: 5
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: 1qazxsw2
-      DB_FOR_DEV: cp_db_dev
-      DB_FOR_TEST: cp_db_test
-      REDIS_HOST: redis://redis:6379/0
-      BUNDLE_PATH: /bundle/vendor
+      DATABASE_POOL: 5
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_USER: root
+      DATABASE_PASSWORD: 1qazxsw2
+      REDIS_URL: redis://redis:6379/0
+      BUNDLE_PATH: /bundle
       RAILS_ENV: development
-      RACK_ENV: development
       NODE_ENV: development
-      PLATFORM: sidekiq
       PORT: 3000
-    command: /bin/sh "/home/app/html/config/runner/dev.sh"
+    command: /bin/sh ".dockerdev/commander/commander.sidekiq.sh"
     volumes:
-      - .:/home/app/html
-      - backend_modules_cache:/home/app/html/node_modules
+      - .:/app
       - bundle_cache:/bundle
     depends_on:
       - db
       - redis
-      - webpacker
-      - backend
-    networks:
-      - bridge-network
-
-  backend:
-    tty: true
-    stdin_open: true
-    build:
-      context: .
-      dockerfile: ./Dockerfile.dev
-    working_dir: /home/app/html
-    environment:
-      DB_POOL: 5
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_USER: root
-      DB_PASSWORD: 1qazxsw2
-      DB_FOR_DEV: cp_db_dev
-      DB_FOR_TEST: cp_db_test
-      REDIS_HOST: redis://redis:6379/0
-      BUNDLE_PATH: /bundle/vendor
-      RAILS_ENV: development
-      RACK_ENV: development
-      NODE_ENV: development
-      PLATFORM: backend
-      PORT: 3000
-    command: /bin/sh "/home/app/html/config/runner/dev.sh"
-    volumes:
-      - .:/home/app/html
-      - backend_modules_cache:/home/app/html/node_modules
-      - bundle_cache:/bundle
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-      - redis
-      - webpacker
-    networks:
-      - bridge-network
-
-  frontend:
-    tty: true
-    stdin_open: true
-    build:
-      context: ./cpfrontend
-      dockerfile: ./Dockerfile.dev
-    working_dir: /home/app/html
-    environment:
-      PREFIX: ""
-      SITE_NAME: "TooCooCats.com"
-      SITE_DOMAIN: "127.0.0.1:8080"
-      SITE_FEATURE_IMAGE: "https://toocoolcats.com/wp-content/uploads/2021/08/toocoolcats2.png"
-      COUPON_PAGE_TITLE: "******** hotCoupons ********"
-      COUPON_PAGE_DESCRIPTION: ""
-      COUPON_API: "https://couponapi.toocoolcats.com/api/v1"
-      BLOG_API: ""
-    command: bash -c "yarn install && yarn dev"
-    volumes:
-      - ./cpfrontend:/home/app/html
-      - frontend_build_cache:/home/app/html/build
-      - frontend_modules_cache:/home/app/html/node_modules
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
-      - redis
-      - sidekiq
-      - webpacker
-      - backend
     networks:
       - bridge-network
 
@@ -154,7 +78,4 @@ networks:
 
 volumes:
   db:
-  frontend_build_cache:
-  frontend_modules_cache:
-  backend_modules_cache:
   bundle_cache:

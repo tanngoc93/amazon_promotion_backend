@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
-  root "page#index"
+  mount Sidekiq::Web => "/sidekiq"
 
-  authenticate :admin_user do
-    mount Sidekiq::Web => "/sidekiq"
-  end
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
   namespace :api do
@@ -15,4 +11,6 @@ Rails.application.routes.draw do
       get "categories", to: "product_categories#index"
     end
   end
+
+  root "page#index"
 end

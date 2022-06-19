@@ -1,6 +1,6 @@
 class SeedAffiliatePlatform < SeedMigration::Migration
   def up
-    AffiliatePlatform.create!(name: "Amazon's Suppliers", domain: "https://www.amazon.com/")
+    AffiliatePlatform.create(name: "Amazon's Suppliers", domain: "https://www.amazon.com/")
   end
 
   def down

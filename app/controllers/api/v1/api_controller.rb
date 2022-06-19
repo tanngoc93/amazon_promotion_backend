@@ -1,6 +1,5 @@
 class Api::V1::ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
-  skip_before_action :redirect_to_new_version!
   before_action :authenticate!
 
   include ActionController::HttpAuthentication::Token::ControllerMethods
@@ -28,7 +27,7 @@ class Api::V1::ApiController < ApplicationController
 
     def authenticate_token
       authenticate_with_http_token do |token, options|
-        @current_admin_user = AdminUser.find_by(access_token: token)
+        @current_user = User.find_by(access_token: token)
       end
     end
 

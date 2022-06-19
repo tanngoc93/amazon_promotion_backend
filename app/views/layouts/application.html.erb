@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TooCoolCats's Coupons - TooCoolCats.com</title>
-    <%= favicon_link_tag '//toocoolcats.com/wp-content/uploads/2021/08/toocoolcats2-280x280.jpg' %>
-    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><%= yield :title %></title>
     <%= csrf_meta_tags %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
-  <body data-controller-path="<%= controller_name %>" data-action-name="<%= action_name %>">
+  <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+ 
     <%= yield %>
   </body>
 </html>

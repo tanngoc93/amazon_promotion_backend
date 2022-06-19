@@ -1,45 +1,80 @@
-source 'https://rubygems.org'
-
+source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
-gem 'mysql2', '>= 0.4.4', '< 0.6.0'
-gem 'sass-rails', '~> 5.0'
-gem 'coffee-rails', '~> 4.2'
-gem 'uglifier', '>= 1.3.0'
-gem 'bootsnap', '>= 1.1.0', require: false
-gem 'redis', '4.1.0'
-gem 'sidekiq', '6.0.0'
-gem 'webpacker', '~> 5.4', '>= 5.4.3'
-gem 'devise'
-gem 'activeadmin'
-gem 'seed_migration'
-gem 'acts-as-taggable-on', '~> 8.1.0'
-gem 'kaminari'
-gem 'active_model_serializers', '~> 0.10.0'
-gem 'rack-cors'
+# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+gem "rails", "~> 7.0.3"
 
-group :staging, :development, :test do
-  gem 'puma', '~> 5.5.2'
-end
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails"
+
+# Use mysql2 as the database for Active Record
+gem "mysql2"
+
+# Use the Puma web server [https://github.com/puma/puma]
+gem "puma"
+
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
+# Build JSON APIs with ease [https://github.com/rails/jbuilder]
+gem "jbuilder"
+
+# Reduces boot times through caching; required in config/boot.rb
+gem "bootsnap", require: false
+
+gem "sassc-rails"
+
+gem "sidekiq"
+
+gem "devise"
+
+gem "activeadmin"
+
+gem "coffee-script"
+
+gem "seed_migration"
+
+gem "acts-as-taggable-on", "~> 9.0"
+
+gem "active_model_serializers", "~> 0.10.0"
+
+gem "rack-cors"
+
+gem "kaminari"
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+
+  gem "rails-erd"
+
+  gem "letter_opener"
+  gem "letter_opener_web"
 end
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  # 
-  gem 'codecov', :require => false
+  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem "web-console"
+
+  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
+  # gem "rack-mini-profiler"
+
+  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
+  # gem "spring"
 end
 
 group :test do
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "webdrivers"
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
