@@ -5,3 +5,6 @@ import "controllers"
 import "jquery"
 import "jquery-ui-dist"
 import "jqtree"
+
+import "@popperjs/core"
+import * as bootstrap from "bootstrap"

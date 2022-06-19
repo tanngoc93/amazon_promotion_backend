@@ -10,10 +10,10 @@ class User < ApplicationRecord
 
   private
 
-    def generate_token
-      loop do
-        token = Devise.friendly_token
-        break token unless User.where(access_token: token).exists?
-      end
+  def generate_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(access_token: token).exists?
     end
+  end
 end

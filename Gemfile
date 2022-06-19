@@ -30,6 +30,8 @@ gem "bootsnap", require: false
 
 gem "sassc-rails"
 
+gem "bootstrap"
+
 gem "sidekiq"
 
 gem "devise"
@@ -43,8 +45,6 @@ gem "seed_migration"
 gem "acts-as-taggable-on", "~> 9.0"
 
 gem "active_model_serializers", "~> 0.10.0"
-
-gem "rack-cors"
 
 gem "kaminari"
 
