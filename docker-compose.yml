@@ -34,8 +34,8 @@ services:
       DATABASE_PASSWORD: 1qazxsw2
       REDIS_URL: redis://redis:6379/0
       BUNDLE_PATH: /bundle
-      RAILS_ENV: production
-      NODE_ENV: production
+      RAILS_ENV: development
+      NODE_ENV: development
       PORT: 3000
     command: /bin/sh ".dockerdev/commander/commander.rails.sh"
     ports:

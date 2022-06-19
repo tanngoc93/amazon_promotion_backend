@@ -60,7 +60,7 @@ RUN gem update --system && \
 
 COPY . $APP_DIR/
 
-RUN RAILS_ENV=production bundle exec rails assets:precompile
+RUN bundle exec rails assets:precompile
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
